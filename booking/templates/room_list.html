@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room List</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Room List</h1>
+    <a href="{% url 'add_room' %}">Add New Room</a>
+    <table>
+        <thead>
+            <tr>
+                <th class="main-header">ID</th>
+                <th>Number</th>
+                <th>Capacity</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th class="main-header">Price</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room.id }}</td>
+                <td>{{ room.numbers }}</td>
+                <td>{{ room.capacity }}</td>
+                <td>{{ room.description }}</td>
+                <td>{{ room.category.title }}</td>
+                <td>{{ room.price }}</td>
+                <td>
+                    {% if room.image %}
+                        <img src="{{ room.image.url }}" alt="Room Image" width="100">
+
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
